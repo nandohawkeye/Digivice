@@ -3,10 +3,11 @@ import 'package:digivice/src/shared/abstracts/i_client_http.dart';
 import 'package:digivice/src/shared/abstracts/urls_constrants.dart';
 import 'package:digivice/src/shared/failures/failure.dart';
 import 'package:digivice/src/shared/models/digimon_model.dart';
-import 'package:digivice/src/shared/services/http_client.dart';
 
 class HomeService {
-  final IClientHttp _client = HTTPClient();
+  HomeService(this._client);
+
+  final IClientHttp _client;
 
   Future<Either<Failure, List<DigimonModel>>> getDigimons() async {
     final result = await _client.get(UrlsConstrants.getAllDigimons);

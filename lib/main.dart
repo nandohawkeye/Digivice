@@ -1,5 +1,6 @@
-import 'package:digivice/src/modules/home/home_page.dart';
+import 'package:digivice/app_module.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 void main() {
   runApp(const App());
@@ -10,11 +11,15 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Digivice',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.blue),
-      home: const HomePage(),
+    return ModularApp(
+      module: AppModule(),
+      child: MaterialApp.router(
+        title: 'Digivice',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(primarySwatch: Colors.blue),
+        routeInformationParser: Modular.routeInformationParser,
+        routerDelegate: Modular.routerDelegate,
+      ),
     );
   }
 }

@@ -5,7 +5,9 @@ import 'package:digivice/src/shared/models/digimon_model.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
-  final HomeService _service = HomeService();
+  HomeController(this._service);
+
+  final HomeService _service;
 
   final Rx<List<DigimonModel>?> _digimons = Rx<List<DigimonModel>?>(null);
 
@@ -46,14 +48,10 @@ class HomeController extends GetxController {
   final Rx<Failure?> _failure = Rx<Failure?>(null);
   Failure? get failure => _failure.value;
 
-  final Rx<bool> _loading = Rx<bool>(false);
-  bool get loading => _loading.value;
-
-  Future<void> getAllDigimons() async {
-    _loading.value = true;
-    await _service.getDigimons().then((result) => result.fold(
-        (failure) => _failure.value = failure,
-        (data) => _digimons.value = data));
-    _loading.value = false;
+  void getAllDigimons() async {
+    await _service.getDigimons().then(
+        (result) => result.fold((failure) => _failure.value = failure, (data) {
+              _digimons.value = data;
+            }));
   }
 }
