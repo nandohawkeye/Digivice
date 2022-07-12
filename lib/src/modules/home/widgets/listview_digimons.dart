@@ -45,7 +45,7 @@ class ListViewDigimons extends StatelessWidget {
                           itemCount: digimons!.length,
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (_, index) =>
-                              DigimonCard(data: digimons![index])),
+                              DigimonCard(digimon: digimons![index])),
                     ),
                   ),
                 ],

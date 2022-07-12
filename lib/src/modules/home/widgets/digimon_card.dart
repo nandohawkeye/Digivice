@@ -1,51 +1,59 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:digivice/src/shared/models/digimon_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:shimmer/shimmer.dart';
 
 class DigimonCard extends StatelessWidget {
-  const DigimonCard({Key? key, required this.data}) : super(key: key);
+  const DigimonCard({Key? key, required this.digimon}) : super(key: key);
 
-  final DigimonModel data;
+  final DigimonModel digimon;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 200,
-      width: 200,
-      padding: const EdgeInsets.all(8),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12),
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black38.withOpacity(0.05),
-              offset: const Offset(0, 5),
-              blurRadius: 15,
+    return InkWell(
+      borderRadius: BorderRadius.circular(12),
+      onTap: () => Modular.to.pushNamed('/digimon', arguments: digimon),
+      child: Container(
+        height: 200,
+        width: 200,
+        padding: const EdgeInsets.all(8),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12),
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black38.withOpacity(0.05),
+                offset: const Offset(0, 5),
+                blurRadius: 15,
+              )
+            ]),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Hero(
+              tag: digimon.name,
+              child: CachedNetworkImage(
+                imageUrl: digimon.image,
+                height: 200,
+                width: 200,
+                errorWidget: (_, __, ___) => const _Error(),
+                placeholder: (_, __) => const _Loading(),
+              ),
+            ),
+            Container(
+              height: 30,
+              alignment: Alignment.center,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                  color: Colors.grey[100],
+                  borderRadius: BorderRadius.circular(8)),
+              child: Text(digimon.name,
+                  style: const TextStyle(fontWeight: FontWeight.w600)),
             )
-          ]),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          CachedNetworkImage(
-            imageUrl: data.image,
-            height: 200,
-            width: 200,
-            errorWidget: (_, __, ___) => const _Error(),
-            placeholder: (_, __) => const _Loading(),
-          ),
-          Container(
-            height: 30,
-            alignment: Alignment.center,
-            width: double.infinity,
-            decoration: BoxDecoration(
-                color: Colors.grey[100],
-                borderRadius: BorderRadius.circular(8)),
-            child: Text(data.name,
-                style: const TextStyle(fontWeight: FontWeight.w600)),
-          )
-        ],
+          ],
+        ),
       ),
     );
   }
