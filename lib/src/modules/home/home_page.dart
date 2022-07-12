@@ -3,6 +3,7 @@ import 'package:digivice/src/modules/home/home_controller.dart';
 import 'package:digivice/src/modules/home/widgets/error_home_widget.dart';
 import 'package:digivice/src/modules/home/widgets/header_home_page.dart';
 import 'package:digivice/src/modules/home/widgets/listview_digimons.dart';
+import 'package:digivice/src/modules/home/widgets/text_form_field_digimons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -48,6 +49,9 @@ class _HomePageState extends State<HomePage> {
                     child: ListView(
                       shrinkWrap: true,
                       children: [
+                        TextFormFieldDigimons(
+                          onChanged: _controller.onChangeSearchDigimon,
+                        ),
                         ListViewDigimons(
                           label: LevelDigimons.fresh,
                           digimons: _controller.digimonsFresh,
