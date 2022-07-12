@@ -1,7 +1,7 @@
 import 'package:digivice/src/modules/home/home_controller.dart';
 import 'package:digivice/src/modules/home/home_page.dart';
 import 'package:digivice/src/modules/home/home_service.dart';
-import 'package:digivice/src/modules/home/splash/splash_page.dart';
+import 'package:digivice/src/modules/splash/splash_page.dart';
 import 'package:digivice/src/shared/services/http_client.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
