@@ -7,13 +7,13 @@ class HeaderHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.blue,
-      width: double.infinity,
-      height: 100,
-      padding: const EdgeInsets.symmetric(vertical: 20),
-      child: Hero(
-        tag: HeroTags.logo,
+    return Hero(
+      tag: HeroTags.logo,
+      child: Container(
+        color: Colors.blue,
+        width: double.infinity,
+        height: 100,
+        padding: const EdgeInsets.symmetric(vertical: 20),
         child: Image.asset(AssetsPaths.logo, height: 60),
       ),
     );
